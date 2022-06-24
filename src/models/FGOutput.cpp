@@ -99,7 +99,7 @@ bool FGOutput::Run(bool Holding)
   if (!enabled) return true;
 
   for (auto output: OutputTypes)
-    output->Run();
+    output->Run(Holding);
 
   return false;
 }
@@ -179,7 +179,7 @@ bool FGOutput::SetDirectivesFile(const SGPath& fname)
     throw BaseException(s.str());
   }
 
-  bool result = Load(document);
+  bool result = LoadFrom(document);
   if (!result)
     cerr << endl << "Aircraft output element has problems in file " << fname << endl;
 
@@ -188,7 +188,7 @@ bool FGOutput::SetDirectivesFile(const SGPath& fname)
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-bool FGOutput::Load(int subSystems, std::string protocol, std::string type,
+bool FGOutput::LoadFrom(int subSystems, std::string protocol, std::string type,
                     std::string port, std::string name, double outRate,
                     std::vector<FGPropertyNode_ptr> & outputProperties)
 {
@@ -235,7 +235,7 @@ bool FGOutput::Load(int subSystems, std::string protocol, std::string type,
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-bool FGOutput::Load(Element* document, const SGPath& dir)
+bool FGOutput::LoadFrom(Element* document, const SGPath& dir)
 {
   // Optional path to use for included files
   includePath = dir;

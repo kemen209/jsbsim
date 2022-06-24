@@ -235,7 +235,7 @@ public:
   /** The Force vector for this gear
       @param surface another surface to interact with, set to NULL for none.
    */
-  const FGColumnVector3& GetBodyForces(FGSurface *surface = NULL);
+  const FGColumnVector3& GetBodyForcesFrom(FGSurface *surface = NULL);
 
   /// Gets the location of the gear in Body axes
   FGColumnVector3 GetBodyLocation(void) const {

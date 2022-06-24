@@ -195,7 +195,7 @@ public:
       @param el XMLElement that is pointing to the output directives
       @param dir optional directory path to load included files from
       @result true if the execution succeeded. */
-  bool Load(Element* el, const SGPath& dir = SGPath());
+  bool LoadFrom(Element* el, const SGPath& dir = SGPath());
   /** Load the output directives and adds a new output instance to the Output
       Manager list. Unlike the Load() method, the new output instance is not
       generated from output directives read in a XML file but from a list of
@@ -208,7 +208,7 @@ public:
       @param outRate output rate in Hz
       @param outputProperties list of properties that should be output
       @result true if the execution succeeded. */
-  bool Load(int subSystems, std::string protocol, std::string type,
+  bool LoadFrom(int subSystems, std::string protocol, std::string type,
             std::string port, std::string name, double outRate,
             std::vector<FGPropertyNode_ptr> & outputProperties);
   /** Get the name identifier to which the output will be directed.

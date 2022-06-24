@@ -276,7 +276,7 @@ void FGLGear::ResetToIC(void)
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-const FGColumnVector3& FGLGear::GetBodyForces(FGSurface *surface)
+const FGColumnVector3& FGLGear::GetBodyForcesFrom(FGSurface *surface)
 {
   double gearPos = 1.0;
 

@@ -146,7 +146,7 @@ public:
       generation and finally the "post" functions.
       @result false if no error.
    */
-  bool Run(void);
+  virtual bool Run(bool Holding) override;
 
   /** Generate the output. This is a pure method so it must be implemented by
       the classes that inherits from FGOutputType. The Print name may not be
