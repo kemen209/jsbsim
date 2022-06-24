@@ -233,14 +233,14 @@ protected:
   /// or pressure biases is passed in.
   /// @param density
   /// @param geometricAlt
-  virtual double CalculateDensityAltitude(double density, double geometricAlt) { return geometricAlt; }
+  virtual double CalculateDensityAltitude(double /*density*/, double geometricAlt) { return geometricAlt; }
 
   /// Calculates the pressure altitude given any temperature or pressure bias.
   /// Calculated pressure for the specified geometric altitude given any temperature
   /// or pressure biases is passed in.
   /// @param pressure
   /// @param geometricAlt
-  virtual double CalculatePressureAltitude(double pressure, double geometricAlt) { return geometricAlt; }
+  virtual double CalculatePressureAltitude(double /*pressure*/, double geometricAlt) { return geometricAlt; }
 
   /// Converts to Rankine from one of several unit systems.
   double ConvertToRankine(double t, eTemperature unit) const;

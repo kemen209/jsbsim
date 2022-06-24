@@ -95,7 +95,7 @@ public:
   void SetPropertyManager(FGPropertyManager *fgpm) { PropertyManager=fgpm;}
   virtual SGPath FindFullPathName(const SGPath& path) const;
   const std::string& GetName(void) { return Name; }
-  virtual bool Load(Element* el) { return true; }
+  virtual bool Load(Element* /*el*/) { return true; }
 
 protected:
   unsigned int exe_ctr;

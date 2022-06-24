@@ -1996,7 +1996,7 @@ bool SGPropertyNode::tie (const SGRawValue<const char *> &rawValue,
 
 template<typename T>
 T SGPropertyNode::getValue(typename boost::disable_if_c<simgear::props
-                           ::PropertyTraits<T>::Internal>::type* dummy) const
+                           ::PropertyTraits<T>::Internal>::type* /*dummy*/) const
 {
     using namespace simgear::props;
     if (_attr == (READ|WRITE) && _type == EXTENDED
@@ -2024,7 +2024,7 @@ T SGPropertyNode::getValue(typename boost::disable_if_c<simgear::props
 
 template<typename T>
 inline T SGPropertyNode::getValue(typename boost::enable_if_c<simgear::props
-                                  ::PropertyTraits<T>::Internal>::type* dummy) const
+                                  ::PropertyTraits<T>::Internal>::type* /*dummy*/) const
 {
   return ::getValue<T>(this);
 }
@@ -2051,7 +2051,7 @@ std::vector<T> SGPropertyNode::getChildValues(const std::string& name) const
 template<typename T>
 bool SGPropertyNode::setValue(const T& val,
                               typename boost::disable_if_c<simgear::props
-                              ::PropertyTraits<T>::Internal>::type* dummy)
+                              ::PropertyTraits<T>::Internal>::type* /*dummy*/)
 {
     using namespace simgear::props;
     if (_attr == (READ|WRITE) && _type == EXTENDED
@@ -2080,7 +2080,7 @@ bool SGPropertyNode::setValue(const T& val,
 template<typename T>
 inline bool SGPropertyNode::setValue(const T& val,
                                      typename boost::enable_if_c<simgear::props
-                                     ::PropertyTraits<T>::Internal>::type* dummy)
+                                     ::PropertyTraits<T>::Internal>::type* /*dummy*/)
 {
   return ::setValue(this, val);
 }
