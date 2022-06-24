@@ -186,6 +186,10 @@ public:
   bool LoadScript(const SGPath& script, double default_dT,
                   const SGPath& initfile);
 
+  bool LoadScript(const SGPath& script,
+                  double sTime, double eTime,
+                  double default_dT,
+                  const SGPath& initfile);
   /** This function is called each pass through the executive Run() method IF
       scripting is enabled.
       @return false if script should exit (i.e. if time limits are violated */

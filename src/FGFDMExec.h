@@ -302,6 +302,10 @@ public:
   bool LoadScript(const SGPath& Script, double deltaT=0.0,
                   const SGPath& initfile=SGPath());
 
+  bool LoadScript(const SGPath& script,
+                  double sTime, double eTime,
+                  double default_dT,
+                  const SGPath& initfile=SGPath());
   /** Set the path to the engine config file directories.
       Relative paths are taken from the root directory.
       @param path path to the directory under which engine config files are

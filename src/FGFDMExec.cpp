@@ -666,6 +666,15 @@ bool FGFDMExec::LoadScript(const SGPath& script, double deltaT,
   return result;
 }
 
+bool FGFDMExec::LoadScript(const SGPath& script,
+                double sTime, double eTime,
+                double default_dT,
+                const SGPath& initfile)
+{
+  Script = new FGScript(this);
+  return Script->LoadScript(GetFullPath(script), sTime, eTime, default_dT, initfile);
+}
+
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 bool FGFDMExec::LoadModel(const SGPath& AircraftPath, const SGPath& EnginePath,

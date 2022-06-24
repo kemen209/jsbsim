@@ -91,6 +91,14 @@ FGScript::~FGScript()
 bool FGScript::LoadScript(const SGPath& script, double default_dT,
                           const SGPath& initfile)
 {
+  return LoadScript(script, -1.0, -1.0, default_dT, initfile);
+}
+
+bool FGScript::LoadScript(const SGPath& script,
+                double sTime, double eTime,
+                double default_dT,
+                const SGPath& initfile)
+{
   SGPath initialize;
   string aircraft="", prop_name="";
   string notifyPropertyName="";
@@ -125,25 +133,29 @@ bool FGScript::LoadScript(const SGPath& script, double default_dT,
   }
 
   // Set sim timing
-
-  if (run_element->HasAttribute("start"))
-    StartTime = run_element->GetAttributeValueAsNumber("start");
-  else
-    StartTime = 0.0;
+  StartTime = sTime;
+  if (StartTime == -1.0) {
+    if (run_element->HasAttribute("start"))
+      StartTime = run_element->GetAttributeValueAsNumber("start");
+    else
+      StartTime = 0.0;
+  }
+  
   FDMExec->Setsim_time(StartTime);
-  if (run_element->HasAttribute("end")) {
-    EndTime   = run_element->GetAttributeValueAsNumber("end");
-  } else {
-    cerr << "An end time (duration) for the script must be specified in the script <run> element." << endl;
-    return false;
+
+  EndTime = eTime;
+  if (EndTime == -1.0) {
+    if (run_element->HasAttribute("end")) {
+      EndTime   = run_element->GetAttributeValueAsNumber("end");
+    } else {
+      return false;
+    }
   }
 
   if (default_dT == 0.0)
     dt = run_element->GetAttributeValueAsNumber("dt");
   else {
     dt = default_dT;
-    cout << endl << "Overriding simulation step size from the command line. New step size is: "
-         << default_dT << " seconds (" << 1/default_dT << " Hz)" << endl << endl;
   }
 
   FDMExec->Setdt(dt);
@@ -166,7 +178,7 @@ bool FGScript::LoadScript(const SGPath& script, double default_dT,
 
     initialize = SGPath::fromLocal8Bit(element->GetAttributeValue("initialize").c_str());
     if (initfile.isNull()) {
-      if (initialize.isNull()) {
+      if ( eTime == -1.0 && initialize.isNull()) {
         cerr << "Initialization file must be specified in use element." << endl;
         return false;
       }
@@ -183,7 +195,7 @@ bool FGScript::LoadScript(const SGPath& script, double default_dT,
   }
 
   FGInitialCondition *IC=FDMExec->GetIC();
-  if ( ! IC->Load( initialize )) {
+  if (eTime == -1.0 && !IC->Load( initialize )) {
     cerr << "Initialization unsuccessful" << endl;
     return false;
   }
