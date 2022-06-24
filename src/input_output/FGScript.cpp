@@ -216,7 +216,7 @@ bool FGScript::LoadScript(const SGPath& script,
     scriptDir = SGPath(".");
 
   while (element) {
-    if (!FDMExec->GetOutput()->Load(element, scriptDir))
+    if (!FDMExec->GetOutput()->LoadFrom(element, scriptDir))
       return false;
 
     element = document->FindNextElement("output");
